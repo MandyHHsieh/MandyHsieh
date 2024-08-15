@@ -19,7 +19,7 @@ output: html_document
 
 # **Interpreting Crowding Effects on FRET Signals for Protein Kinetics Analysis**
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
+This is Mandy's personal website for research! I'm learning how to make a website using RStudio and how to load the website using GitHub.
 
 ## How to use
 
