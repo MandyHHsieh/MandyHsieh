@@ -19,7 +19,7 @@ output: html_document
 
 # **Interpreting Crowding Effects on FRET Signals for Protein Kinetics Analysis**
 
-This is Mandy's personal website for research! I'm learning how to make a website using RStudio and how to load the website using GitHub.
+This is Mandy's personal website for research! I'm learning how to create a website using RStudio and how to host it on GitHub.
 
 ## Abstract
 
