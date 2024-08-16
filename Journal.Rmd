@@ -24,7 +24,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 - 25 mM Tris HCl, pH 8 (prepared from powdered form)
 - Milli-Q water used for dilution
 
-Step-by-Step Procedure
+**Procedure**
 
 **Solution A: 150 mM NaCl**
 
@@ -78,3 +78,5 @@ The FRET pairs CyPet and YPet were cloned into pET28B for expression in BL21(DE3
 
 
 Sonicate the proteins for 10-15 min at 37°C 
+
+
