@@ -16,7 +16,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 # Interaction Buffer (Measured pH of 8.00)
 
-2024 | 8 | 15 Last compiled: `r Sys.Date()`
+2024 | 8 | 15 Last updated: `r Sys.Date()`
 
 **Materials**
 
@@ -47,7 +47,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 # 300 g/L, pH 7.0 Bovine Serum Albumin (BSA) Solution
 
-2024 | 8 | 15 Last compiled: `r Sys.Date()`
+2024 | 8 | 15 Last updated: `r Sys.Date()`
 
 **Materials**
 
@@ -69,7 +69,7 @@ Note: Sodium azide is not used, so ensure BSA solution is used within the day!
 
 # Protein Purification
 
-2024 | 8 | 15 Last compiled: `r Sys.Date()`
+2024 | 8 | 15 Last updated: `r Sys.Date()`
 
 **Expression and Purification**
 
@@ -83,7 +83,7 @@ Sonicate the proteins for 10-15 min at 37°C
 
 # Statistical Analysis using a T-Test
 
-2024 | 8 | 16 Last compiled: `r Sys.Date()`
+2024 | 8 | 16 Last updated: `r Sys.Date()`
 
 
 **Data**
