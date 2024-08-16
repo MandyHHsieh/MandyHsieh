@@ -80,3 +80,117 @@ The FRET pairs CyPet and YPet were cloned into pET28B for expression in BL21(DE3
 Sonicate the proteins for 10-15 min at 37°C 
 
 
+
+# Statistical Analysis using a T-Test
+
+2024 | 8 | 16 Last compiled: `r Sys.Date()`
+
+
+**Data**
+
+```{r}
+# Using data acquired from qFRET 
+data_150g <- c(124.3, 541.9, 1318)
+data_100g <- c(64.44, 40.12, 49.2)
+data_50g  <- c(18.82, 22.03, 22.74)
+data_0g   <- c(4.76, 5.699, 5.587)
+
+```
+
+**Welch Two Sample t-test between each group and the control group (0 g/L)**
+
+**150 g/L vs 0 g/L**
+
+```{r}
+t_test_150_vs_0 <- t.test(data_150g, data_0g)
+print(t_test_150_vs_0)
+
+```
+
+**100 g/L vs 0 g/L**
+
+```{r}
+t_test_100_vs_0 <- t.test(data_100g, data_0g)
+print(t_test_100_vs_0)
+
+```
+**50 g/L vs 0 g/L**
+
+```{r}
+t_test_50_vs_0 <- t.test(data_50g, data_0g)
+print(t_test_50_vs_0)
+
+```
+**Statistical Plot**
+
+```{r}
+
+# A library part of tidyverse 
+library(ggplot2)
+
+# Combining data into a data frame
+data <- data.frame(
+  Group = rep(c("150 g/L", "100 g/L", "50 g/L", "0 g/L"), each = 3),
+  Value = c(data_150g, data_100g, data_50g, data_0g)
+)
+
+# Calculate means and standard deviations for each BSA Concentration
+summary_stats <- aggregate(Value ~ Group, data, function(x) c(mean = mean(x), sd = sd(x)))
+summary_stats <- do.call(data.frame, summary_stats)
+summary_stats$Group <- factor(summary_stats$Group, levels = c("150 g/L", "100 g/L", "50 g/L", "0 g/L"))
+
+# Perform T-tests and assign significance markers
+t_test_150_vs_0 <- t.test(data_150g, data_0g)
+t_test_100_vs_0 <- t.test(data_100g, data_0g)
+t_test_50_vs_0 <- t.test(data_50g, data_0g)
+
+# Adding significance markers based on p-values
+summary_stats$Significance <- c(
+  ifelse(t_test_150_vs_0$p.value < 0.001, "***",
+         ifelse(t_test_150_vs_0$p.value < 0.01, "**",
+                ifelse(t_test_150_vs_0$p.value < 0.05, "*", "ns"))),
+  ifelse(t_test_100_vs_0$p.value < 0.001, "***",
+         ifelse(t_test_100_vs_0$p.value < 0.01, "**",
+                ifelse(t_test_100_vs_0$p.value < 0.05, "*", "ns"))),
+  ifelse(t_test_50_vs_0$p.value < 0.001, "***",
+         ifelse(t_test_50_vs_0$p.value < 0.01, "**",
+                ifelse(t_test_50_vs_0$p.value < 0.05, "*", "ns"))),
+  "ns"
+)
+
+# Plotting the data
+ggplot(summary_stats, aes(x = Group, y = Value.mean)) +
+  geom_bar(stat = "identity", fill = "skyblue", width = 0.7) +
+  geom_errorbar(aes(ymin = Value.mean - Value.sd, ymax = Value.mean + Value.sd), width = 0.2) +
+  geom_text(aes(label = Significance), vjust = -0.5, size = 5) +  # Significance markers
+  labs(title = "T-test: Mean Values with Standard Deviation for BSA Concentrations",
+       x = "BSA Concentration (g/L)",
+       y = "KD (μM)") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +  # Centering the title
+  annotate("text", x = 3.5, y = max(summary_stats$Value.mean + summary_stats$Value.sd) * 1.2, 
+           label = "Significance: * p < 0.05, ** p < 0.01, *** p < 0.001, ns: not significant",
+           hjust = 1, size = 4)
+
+```
+
+**P value for 150 g/L to 0 g/L** 
+
+```{r}
+t_test_150_vs_0$p.value
+
+```
+**P value for 100 g/L to 0 g/L**
+
+```{r}
+t_test_100_vs_0$p.value
+
+```
+**P value for 50 g/L to 0 g/L**
+
+```{r}
+t_test_50_vs_0$p.value
+
+```
+
+
